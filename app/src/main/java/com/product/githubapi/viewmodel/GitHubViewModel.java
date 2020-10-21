@@ -5,10 +5,8 @@ import androidx.lifecycle.ViewModel;
 
 import com.product.githubapi.GitHubInjector;
 import com.product.githubapi.GitHubRepository;
-import com.product.githubapi.model.EarthQuakeData;
 import com.product.githubapi.model.GitHubData;
 import com.product.githubapi.model.GitHubResponseModel;
-import com.product.githubapi.model.MainModel;
 
 import java.util.ArrayList;
 
