@@ -12,7 +12,9 @@ import androidx.annotation.VisibleForTesting;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.product.githubapi.adapters.GitHubCommitsAdapter;
 import com.product.githubapi.databinding.MainFragmentBinding;
 import com.product.githubapi.model.GitHubResponseModel;
 import com.product.githubapi.viewmodel.GitHubViewModel;
@@ -26,6 +28,7 @@ public class GitHubFragment extends Fragment {
     private GitHubViewModel viewModel;
     private ProgressDialog loading;
     private ArrayList<GitHubResponseModel> dataList;
+    private GitHubCommitsAdapter adapter;
 
     @Nullable
     @Override
@@ -42,6 +45,8 @@ public class GitHubFragment extends Fragment {
             viewModel = new ViewModelProvider(this).get(GitHubViewModel.class);
         }
 
+        initRecyclerView();
+        observeData();
         if(loading == null) {
             loading = new ProgressDialog(getContext());
             loading.setCancelable(true);
@@ -49,7 +54,6 @@ public class GitHubFragment extends Fragment {
             loading.show();
         }
         viewModel.fetchDataFromServer();
-        observeData();
     }
 
     @VisibleForTesting
@@ -62,9 +66,18 @@ public class GitHubFragment extends Fragment {
         viewModel.getGitHubList().observe(getViewLifecycleOwner(), new Observer<ArrayList<GitHubResponseModel>>() {
             @Override
             public void onChanged(ArrayList<GitHubResponseModel> data) {
+                adapter.updateList(data);
                 dataList = data;
                 loading.dismiss();
             }
         });
+    }
+
+    private void initRecyclerView() {
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        if(adapter == null) {
+            adapter = new GitHubCommitsAdapter(getContext(), null);
+        }
+        binding.recyclerView.setAdapter(adapter);
     }
 }

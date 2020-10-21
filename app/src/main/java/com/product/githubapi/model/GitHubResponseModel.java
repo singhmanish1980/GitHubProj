@@ -4,28 +4,17 @@ import com.google.gson.annotations.SerializedName;
 
 public class GitHubResponseModel {
     @SerializedName("commit")
-    private GitHubAuthor commit;
-
-    @SerializedName("message")
-    private String message;
+    private GitHubCommit commit;
 
     @SerializedName("sha")
     private String sha;
 
-    public GitHubAuthor getCommit() {
+    public GitHubCommit getCommit() {
         return commit;
     }
 
-    public void setCommit(GitHubAuthor commit) {
+    public void setCommit(GitHubCommit commit) {
         this.commit = commit;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
     }
 
     public String getSha() {

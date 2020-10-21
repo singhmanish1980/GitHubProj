@@ -6,11 +6,11 @@ public class GitHubAuthorData {
     @SerializedName("name")
     private String name;
 
-    public String getAuthor() {
+    public String getName() {
         return name;
     }
 
-    public void setAuthor(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 }
