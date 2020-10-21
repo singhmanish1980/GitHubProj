@@ -6,7 +6,7 @@ public enum GitHubInjector {
 
     public GitHubComponent getComponent(){
         if(component == null){
-            component = DaggerMainComponent.builder().build();
+            component = DaggerGitHubComponent.builder().build();
         }
         return component;
     }
