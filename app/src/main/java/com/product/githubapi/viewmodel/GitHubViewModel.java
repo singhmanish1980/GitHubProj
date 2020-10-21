@@ -33,6 +33,9 @@ public class GitHubViewModel extends ViewModel {
         return data;
     }
 
+    /**
+     * get data from git hub api
+     */
     public void fetchDataFromServer() {
 
         // Simple Observable
