@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHubProj.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHubProj.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/GitHubApi.iml" filepath="$PROJECT_DIR$/.idea/modules/GitHubApi.iml" group="GitHubApi" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/app.iml" group="GitHubApi/app" />
     </modules>
   </component>
 </project>
