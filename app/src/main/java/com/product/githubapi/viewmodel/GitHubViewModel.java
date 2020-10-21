@@ -1,5 +1,6 @@
 package com.product.githubapi.viewmodel;
 
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -35,6 +36,11 @@ public class GitHubViewModel extends ViewModel {
         return serverLiveData;
     }
 
+    @VisibleForTesting
+    public ArrayList<GitHubResponseModel> getGitHubListData() {
+        return serverListData;
+    }
+
     /**
      * get data from git hub api
      */
@@ -63,7 +69,11 @@ public class GitHubViewModel extends ViewModel {
     }
 
     void setServerInitialData(GitHubResponseModel[] responseModel){
-        serverListData = new ArrayList<>(Arrays.asList(responseModel).subList(0, PAGE_SIZE));
+        if(responseModel.length > PAGE_SIZE) {
+            serverListData = new ArrayList<>(Arrays.asList(responseModel).subList(0, PAGE_SIZE));
+        } else {
+            serverListData = new ArrayList<>(Arrays.asList(responseModel));
+        }
         serverLiveData.postValue(serverListData);
     }
 }
