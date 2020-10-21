@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         if(getSupportFragmentManager().findFragmentByTag("fragment") == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new MainFragment(), "fragment")
+            getSupportFragmentManager().beginTransaction().replace(R.id.frameLayout,new GitHubFragment(), "fragment")
                     .commit();
         }
     }

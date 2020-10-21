@@ -14,7 +14,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.product.githubapi.databinding.MainFragmentBinding;
-import com.product.githubapi.model.GitHubData;
+import com.product.githubapi.model.GitHubResponseModel;
 import com.product.githubapi.viewmodel.GitHubViewModel;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class GitHubFragment extends Fragment {
 
     private GitHubViewModel viewModel;
     private ProgressDialog loading;
-    private ArrayList<GitHubData> dataList;
+    private ArrayList<GitHubResponseModel> dataList;
 
     @Nullable
     @Override
@@ -49,6 +49,7 @@ public class GitHubFragment extends Fragment {
             loading.show();
         }
         viewModel.fetchDataFromServer();
+        observeData();
     }
 
     @VisibleForTesting
@@ -58,9 +59,9 @@ public class GitHubFragment extends Fragment {
 
 
     private void observeData() {
-        viewModel.getGitHubList().observe(getViewLifecycleOwner(), new Observer<ArrayList<GitHubData>>() {
+        viewModel.getGitHubList().observe(getViewLifecycleOwner(), new Observer<ArrayList<GitHubResponseModel>>() {
             @Override
-            public void onChanged(ArrayList<GitHubData> data) {
+            public void onChanged(ArrayList<GitHubResponseModel> data) {
                 dataList = data;
                 loading.dismiss();
             }

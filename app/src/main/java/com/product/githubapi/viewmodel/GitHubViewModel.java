@@ -5,10 +5,10 @@ import androidx.lifecycle.ViewModel;
 
 import com.product.githubapi.GitHubInjector;
 import com.product.githubapi.GitHubRepository;
-import com.product.githubapi.model.GitHubData;
 import com.product.githubapi.model.GitHubResponseModel;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,44 +22,48 @@ public class GitHubViewModel extends ViewModel {
     @Inject
     GitHubRepository repository;
 
-    GitHubResponseModel serverData = null;
-    public MutableLiveData<ArrayList<GitHubData>> data = new MutableLiveData<>();
+    ArrayList<GitHubResponseModel> serverListData = null;
+    public MutableLiveData<ArrayList<GitHubResponseModel>> serverLiveData = new MutableLiveData<>();
+
+    final int PAGE_SIZE = 25;
 
     public GitHubViewModel() {
         GitHubInjector.INSTANCE.getComponent().inject(this);
     }
 
-    public MutableLiveData<ArrayList<GitHubData>> getGitHubList() {
-        return data;
+    public MutableLiveData<ArrayList<GitHubResponseModel>> getGitHubList() {
+        return serverLiveData;
     }
 
     /**
      * get data from git hub api
      */
     public void fetchDataFromServer() {
-
-        // Simple Observable
-        if (serverData == null) {
-            repository.fetchServerData().observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new SingleObserver<GitHubResponseModel>() {
-                        @Override
-                        public void onSubscribe(Disposable d) {
-
-                        }
-
-                        @Override
-                        public void onSuccess(GitHubResponseModel mainResponseModels) {
-                            serverData = mainResponseModels;
-                            // todo data.setValue();
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            // todo
-                        }
-                    });
-        } else {
-            // todo data.setValue();
+        if(serverListData != null) {
+            serverListData.clear();
         }
+        // Simple Observable
+        repository.fetchServerData().observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<GitHubResponseModel[]>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(GitHubResponseModel[] responseModels) {
+                        setServerInitialData(responseModels);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        // todo
+                    }
+                });
+    }
+
+    void setServerInitialData(GitHubResponseModel[] responseModel){
+        serverListData = new ArrayList<>(Arrays.asList(responseModel).subList(0, PAGE_SIZE));
+        serverLiveData.postValue(serverListData);
     }
 }
