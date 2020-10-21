@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class MainModule {
+public class GitHubModule {
 
     @Provides
     MainRepository provideRepository(){

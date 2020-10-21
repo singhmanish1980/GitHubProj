@@ -1,10 +1,10 @@
 package com.product.githubapi;
 
-public enum MainInjector {
+public enum GitHubInjector {
     INSTANCE;
-    private static MainComponent component;
+    private static GitHubComponent component;
 
-    public MainComponent getComponent(){
+    public GitHubComponent getComponent(){
         if(component == null){
             component = DaggerMainComponent.builder().build();
         }
