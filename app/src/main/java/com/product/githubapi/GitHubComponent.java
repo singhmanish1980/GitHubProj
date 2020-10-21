@@ -2,7 +2,7 @@ package com.product.githubapi;
 
 import dagger.Component;
 
-@Component(modules = MainModule.class)
+@Component(modules = GitHubModule.class)
 public interface GitHubComponent {
 
 }

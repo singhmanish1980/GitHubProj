@@ -7,8 +7,8 @@ import dagger.Provides;
 public class GitHubModule {
 
     @Provides
-    MainRepository provideRepository(){
-        return new MainRepository();
+    GitHubRepository provideRepository(){
+        return new GitHubRepository();
     }
 
 }
