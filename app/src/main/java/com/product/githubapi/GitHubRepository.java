@@ -16,6 +16,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class GitHubRepository {
+    /**
+     * get data from server
+     * @return response data
+     */
     public Single<GitHubResponseModel> fetchServerData() {
         return Single.create(new SingleOnSubscribe<GitHubResponseModel>() {
             @Override
