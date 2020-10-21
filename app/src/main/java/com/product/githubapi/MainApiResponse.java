@@ -1,4 +1,4 @@
-package com.product.githubapi.model;
+package com.product.githubapi;
 
 
 public interface MainApiResponse {
